@@ -1,14 +1,24 @@
 {
-  "welcomeFile": "/launchpage.html#Shell-home",
+  "welcomeFile": "/uipublicflp/",
+  "authenticationMethod": "route",
+  "logout": {
+    "logoutEndpoint": "/logout"
+  },
   "routes": [
     {
-      "source": "^/app/(.*)$",
+      "source": "^/user-api(.*)",
       "target": "$1",
+      "service": "sap-approuter-userapi",
+      "authenticationType": "xsuaa"
+    },
+    {
+      "source": "^/appconfig/",
       "localDir": ".",
       "cacheControl": "no-cache, no-store, must-revalidate"
     },
     {
-      "source": "^/appconfig/",
+      "source": "^/app/(.*)$",
+      "target": "$1",
       "localDir": ".",
       "cacheControl": "no-cache, no-store, must-revalidate"
     },

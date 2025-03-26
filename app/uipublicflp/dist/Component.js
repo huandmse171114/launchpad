@@ -1,0 +1,2 @@
+sap.ui.define(["sap/ui/core/UIComponent","sap/ushell/services/Container"],function(e){"use strict";return e.extend("uipublicflp.Component",{metadata:{manifest:"json"},init:function(){e.prototype.init.apply(this,arguments);this.getModel().getMetaModel().requestObject("/").then(function(){sap.ushell.bootstrap("local").then(function(){sap.ushell.Container.createRenderer("fiori2",true).then(function(e){e.placeAt("content")})})}.bind(this),()=>window.open(window.location.href,"_self"))}})});
+//# sourceMappingURL=Component.js.map
