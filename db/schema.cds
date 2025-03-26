@@ -9,3 +9,8 @@ using {
     managed ,
     temporal
 } from '@sap/cds/common';
+
+entity  Users: cuid, managed {
+    username: String(10);
+    email: String(50);
+}
