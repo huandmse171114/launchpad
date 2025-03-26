@@ -46,6 +46,12 @@
           "kind": "xsuaa"
         },
         "kind": "xsuaa"
+      },
+      "xsuaa": {
+        "kind": "rest",
+        "credentials": {
+          "destination": "xsuaa"
+        }
       }
     }
   },

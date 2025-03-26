@@ -16,7 +16,7 @@
         },
         "dataSources": {
             "mainService": {
-                "uri": "/odata/v4/customsrv/",
+                "uri": "/odata/v4/common-srv/",
                 "type": "OData",
                 "settings": {
                     "odataVersion": "4.0"

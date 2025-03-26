@@ -1,132 +1,138 @@
-window["sap-ushell-config"] = {
-  defaultRenderer: "fiori2",
-  renderers: {
+(function () {
+  "use strict";
+
+  const customHost = document.cookie.match('(^|;)\\s*' + 'x-custom-host' + '\\s*=\\s*([^;]+)')?.pop() || ''
+
+  window["sap-ushell-config"] = {
+    defaultRenderer: "fiori2",
+    renderers: {
       fiori2: {
-          componentData: {
-              config: {
-                  enableSearch: true,
-                  rootIntent: "Shell-home"
-              },
+        componentData: {
+          config: {
+            enableSearch: true,
+            rootIntent: "Shell-home"
           },
+        },
       },
-  },
-  services: {
+    },
+    services: {
       LaunchPage: {
-          adapter: {
-              config: {
-                  catalogs: [],
-                  groups: [
-                      {
-                          id: "MyHome",
-                          title: "Custom Launchpad",
-                          isPreset: false,
-                          isVisible: true,
-                          isGroupLocked: false,
-                          tiles: []
-                      },
-                      {
-                          id: "ExternalSubaccount",
-                          title: "External Subaccount Application",
-                          isPreset: false,
-                          isVisible: true,
-                          isGroupLocked: false,
-                          tiles: [
-                              {
-                                  id: "PurchaseRequisition",
-                                  tileType: "sap.ushell.ui.tile.StaticTile",
-                                  properties: {
-                                      title: "Purchase Requisition Management",
-                                      targetURL: "#s4purreqn-display",
-                                      icon: "sap-icon://documents"
-                                  }
-                              },
-                              {
-                                  id: "Payment",
-                                  tileType: "sap.ushell.ui.tile.StaticTile",
-                                  properties: {
-                                      title: "Payment Application",
-                                      targetURL: "#payment-display",
-                                      icon: "sap-icon://monitor-payments"
-                                  }
-                              }
-                          ]
-                      },
-                      {
-                          id: "InternalSubaccount",
-                          title: "Internal Subaccount Application",
-                          isPreset: false,
-                          isVisible: true,
-                          isGroupLocked: false,
-                          tiles: [
-                              {
-                                  id: "PurreqDedicated",
-                                  tileType: "sap.ushell.ui.tile.StaticTile",
-                                  properties: {
-                                      title: "Purchase Requisition Dedicated",
-                                      targetURL: "#purreqd-display",
-                                      icon: "sap-icon://documents"
-                                  }
-                              }
-                          ]
-                      }
-                  ]
+        adapter: {
+          config: {
+            catalogs: [],
+            groups: [
+              {
+                id: "MyHome",
+                title: "Custom Launchpad",
+                isPreset: false,
+                isVisible: true,
+                isGroupLocked: false,
+                tiles: []
+              },
+              {
+                id: "ExternalSubaccount",
+                title: "External Subaccount Application",
+                isPreset: false,
+                isVisible: true,
+                isGroupLocked: false,
+                tiles: [
+                  {
+                    id: "PurchaseRequisition",
+                    tileType: "sap.ushell.ui.tile.StaticTile",
+                    properties: {
+                      title: "Purchase Requisition Management",
+                      targetURL: "#s4purreqn-display",
+                      icon: "sap-icon://documents"
+                    }
+                  },
+                  {
+                    id: "Payment",
+                    tileType: "sap.ushell.ui.tile.StaticTile",
+                    properties: {
+                      title: "Payment Application",
+                      targetURL: "#payment-display",
+                      icon: "sap-icon://monitor-payments"
+                    }
+                  }
+                ]
+              },
+              {
+                id: "InternalSubaccount",
+                title: "Internal Subaccount Application",
+                isPreset: false,
+                isVisible: true,
+                isGroupLocked: false,
+                tiles: [
+                  {
+                    id: "PurreqDedicated",
+                    tileType: "sap.ushell.ui.tile.StaticTile",
+                    properties: {
+                      title: "Purchase Requisition Dedicated",
+                      targetURL: "#purreqd-display",
+                      icon: "sap-icon://documents"
+                    }
+                  }
+                ]
               }
+            ]
           }
+        }
       },
       NavTargetResolution: {
-          config: {
-              enableClientSideTargetResolution: true
-          }
+        config: {
+          enableClientSideTargetResolution: true
+        }
       },
       ClientSideTargetResolution: {
-          adapter: {
-              config: {
-                  inbounds: {
-                      PurchaseRequisition: {
-                          semanticObject: "s4purreqn",
-                          action: "display",
-                          title: "Purchase Requisition",
-                          signature: {
-                              parameters: {},
-                              additionalParameters: "allowed"
-                          },
-                          navigationMode: "explace",
-                          resolutionResult: {
-                              applicationType: "URL",
-                              url: "https://a4b470e3trial-dev-pr-management.cfapps.us10-001.hana.ondemand.com/"
-                          }
-                      },
-                      Payment: {
-                          semanticObject: "payment",
-                          action: "display",
-                          title: "Payment Application",
-                          signature: {
-                              parameters: {},
-                              additionalParameters: "allowed"
-                          },
-                          navigationMode: "explace",
-                          resolutionResult: {
-                              applicationType: "URL",
-                              url: "https://a889d560trial-dev-payment-management.cfapps.us10-001.hana.ondemand.com/"
-                          }
-                      },
-                      PurreqDedicated: {
-                          semanticObject: "purreqd",
-                          action: "display",
-                          title: "Purchase Request Dedicated",
-                          signature: {
-                              parameters: {},
-                              additionalParameters: "allowed"
-                          },
-                          navigationMode: "explace",
-                          resolutionResult: {
-                              applicationType: "URL",
-                              url: "https://4a1685dctrial-dev-prdedicated.cfapps.us10-001.hana.ondemand.com/"
-                          }
-                      }
-                  }
+        adapter: {
+          config: {
+            inbounds: {
+              PurchaseRequisition: {
+                semanticObject: "s4purreqn",
+                action: "display",
+                title: "Purchase Requisition",
+                signature: {
+                  parameters: {},
+                  additionalParameters: "allowed"
+                },
+                navigationMode: "explace",
+                resolutionResult: {
+                  applicationType: "URL",
+                  url: "https://a4b470e3trial-dev-pr-management.cfapps.us10-001.hana.ondemand.com/"
+                }
+              },
+              Payment: {
+                semanticObject: "payment",
+                action: "display",
+                title: "Payment Application",
+                signature: {
+                  parameters: {},
+                  additionalParameters: "allowed"
+                },
+                navigationMode: "explace",
+                resolutionResult: {
+                  applicationType: "URL",
+                  url: "https://a889d560trial-dev-payment-management.cfapps.us10-001.hana.ondemand.com/"
+                }
+              },
+              PurreqDedicated: {
+                semanticObject: "purreqd",
+                action: "display",
+                title: "Purchase Request Dedicated",
+                signature: {
+                  parameters: {},
+                  additionalParameters: "allowed"
+                },
+                navigationMode: "explace",
+                resolutionResult: {
+                  applicationType: "URL",
+                  url: "https://4a1685dctrial-dev-prdedicated.cfapps.us10-001.hana.ondemand.com/"
+                }
               }
+            }
           }
+        }
       }
-  }
-};
+    }
+  };
+}());

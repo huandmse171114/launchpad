@@ -2,23 +2,27 @@
 <html>
 
 <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Launchpad</title>
 
-    <script src="./appconfig/fioriSandboxConfig.js"></script>
-    <script src="./appconfig/fioriSandboxUser.js"></script>
-    <script src="https://ui5.sap.com/test-resources/sap/ushell/bootstrap/sandbox.js"></script>
-    <script src="https://ui5.sap.com/resources/sap-ui-core.js" data-sap-ui-libs="sap.m, sap.ushell, sap.fe.templates"
-        data-sap-ui-compatVersion="edge" data-sap-ui-theme="sap_horizon" data-sap-ui-frameOptions="allow"
-        data-sap-ui-bindingSyntax="complex"></script>
-    <script>
-        sap.ui.getCore().attachInit(function () {
-            sap.ushell.Container.createRenderer().placeAt('content');
-        });
+  <script id="sap-ui-flp-config" src="appconfig/fioriSandboxConfig.js"></script>
+  <script id="sap-ui-flp-user" src="appconfig/fioriSandboxUser.js"></script>
+
+  <script id="sap-ui-bootstrap" src="https://sapui5.hana.ondemand.com/1.132.1/resources/sap-ui-core.js"
+    data-sap-ui-theme="sap_horizon" data-sap-ui-resourceroots='{
+      "uipublicflp": "./"
+    }' data-sap-ui-language="en" data-sap-ui-oninit="module:sap/ui/core/ComponentSupport"
+    data-sap-ui-compatVersion="edge" data-sap-ui-async="true" data-sap-ui-frameOptions="trusted">
     </script>
 </head>
 
-<body class="sapUiBody" id="content"></body>
+<body class="sapUiBody sapUiSizeCompact">
+  <div data-sap-ui-component data-name="uipublicflp" data-id="container" data-settings='{"id" : "uipublicflp"}'
+    data-handle-validation="true">
+  </div>
+  <div id="content"></div>
+</body>
 
 </html>
