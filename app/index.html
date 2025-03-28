@@ -27,7 +27,7 @@
                     return Controller.extend("PreviewController", {
                         onInit: function () {
 
-                            const data = {"Services":[{"ServiceName":"CommonSrv","DetailsURL":"./odata/v4/common-srv/","Metadata":"./odata/v4/common-srv/$metadata","Entities":[{"Name":"Users","URL":"./odata/v4/common-srv/Users","FioriURL":"$fiori-preview/CommonSrv/Users#preview-app"}],"EntitiesCount":1}]}
+                            const data = {"Services":[{"ServiceName":"Users","DetailsURL":"./odata/v4/users/","Metadata":"./odata/v4/users/$metadata","Entities":[{"Name":"Users","URL":"./odata/v4/users/Users","FioriURL":"$fiori-preview/Users/Users#preview-app"}],"EntitiesCount":1}]}
                             this.getView().setModel(new JSONModel(data));
                         }
                     });

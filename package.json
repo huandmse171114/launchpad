@@ -52,7 +52,13 @@
         "credentials": {
           "destination": "xsuaa"
         }
+      },
+      "approuter-api": {
+      "kind": "rest",
+      "credentials": {
+        "destination": "user-api"
       }
+    }
     }
   },
   "lcap": true

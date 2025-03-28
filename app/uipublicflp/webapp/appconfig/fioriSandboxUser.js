@@ -1,47 +1,67 @@
-(function() {
+export async function fetchUser() {
   "use strict";
 
-  // If user details can be retrieved, set them for Mock Launchpad
-  fetch('/user-api/currentUser')
-    .then((res) => {
-      if (!res.ok) {
-        // Workaround: In case of 401 error, reload the page to re-authenticate
-        // https://www.npmjs.com/package/@sap/approuter#session-handling
-        if(res.status === 401){
-          window.open(window.location.href, "_self");
-        }else{
-          throw Error(res.statusText);
-        }
-      }
-      // Workaround: If no JSON is returned, reload the page to re-authenticate
-      // https://www.npmjs.com/package/@sap/approuter#session-handling
-      const contentType = res.headers.get("content-type");
-      if (contentType.includes("text/html")) {
+  try {
+    const res = await fetch('/user-api/currentUser');
+
+    // Handle non-OK responses
+    if (!res.ok) {
+      if (res.status === 401) {
+        // In case of 401 error, reload the page to re-authenticate
         window.open(window.location.href, "_self");
+        return;
       }
-      return res.json()
-    })
-    .then((data) => {
-      if(data) {
-        window["sap-ushell-config"].services = {
-          ...window["sap-ushell-config"].services,
-          Container: {
-            adapter: {
-              config: {
-                id: data.name || 'DefaultUser',
-                firstName: data.firstname || 'Default',
-                lastName: data.lastname || 'User',
-                fullName: `${data.firstname} ${data.lastname}` || 'Default User',
-                email: data.email || 'default.user@example.com'
-              }
+      throw new Error(res.statusText);
+    }
+
+    // Check if the response content is HTML (might be a login page)
+    const contentType = res.headers.get("content-type");
+    if (contentType && contentType.includes("text/html")) {
+      window.open(window.location.href, "_self");
+      return;
+    }
+
+    const data = await res.json();
+
+    if (data) {
+      console.log("Running this script");
+      window.currentUser = {
+        id: data.name || 'Vjp pro',
+        firstName: data.firstname || 'Oach xa lach',
+        lastName: data.lastname || 'Pham Thoai',
+        fullName: (data.firstname && data.lastname) ? `${data.firstname} ${data.lastname}` : 'Me Bap',
+        email: data.email || 'minhhuan0507@example.com',
+        name: data.name || 'minhhuan0507@gmail.com'
+      };
+
+      window["sap-ushell-config"].services = {
+        ...window["sap-ushell-config"].services,
+        Container: {
+          adapter: {
+            config: {
+              id: data.name || 'DefaultUser',
+              firstName: data.firstname || 'Default',
+              lastName: data.lastname || 'User',
+              fullName: (data.firstname && data.lastname) ? `${data.firstname} ${data.lastname}` : 'Default Userccccc',
+              email: data.email || 'default.user@example.com'
             }
           }
-        };
-      }else{
-        console.error("Error: User infos empty");
-      }
-    }).catch((error) => {
-        console.warn("Error: User infos could not be fetched")
-        console.warn(`Error: ${error}`);
-    });
-}());
+        }
+      };
+    } else {
+      console.error("Error: User infos empty");
+    }
+  } catch (error) {
+    console.warn("Error: User infos could not be fetched");
+    console.warn(`Error: ${error}`);
+    console.log("Running this script");
+    window.currentUser = {
+      id: 'Vjp pro',
+      firstName: 'Oach xa lach',
+      lastName: 'Pham Thoai',
+      fullName: 'Me Bap',
+      email: 'minhhuan0507@example.com',
+      name: 'minhhuan0507@gmail.com'
+    };
+  }
+}
