@@ -5,9 +5,12 @@ import { fetchUser } from './fioriSandboxUser.js'
   const customHost = document.cookie.match('(^|;)\\s*' + 'x-custom-host' + '\\s*=\\s*([^;]+)')?.pop() || ''
   await fetchUser()
 
+  const currentUser = window.currentUser
+
+  console.log("aaaaa")
   console.log(currentUser)
 
-  await fetch(`/odata/v4/users/getUsersLaunchpadTiles(username='${window.currentUser.name}')`)
+  await fetch(`/odata/v4/users/getUsersLaunchpadTiles(username='${currentUser.name}')`)
     .then(response => {
       if (!response.ok) {
         throw new Error("Network response was not ok");
@@ -34,7 +37,19 @@ import { fetchUser } from './fioriSandboxUser.js'
               },
             },
           },
+
           services: {
+            Container: {
+              adapter: {
+                config: {
+                  id: currentUser.id,
+                  firstName: currentUser.firstName,
+                  lastName: currentUser.lastName,
+                  fullName: currentUser.fullName,
+                  email: currentUser.email
+                }
+              }
+            },
             LaunchPage: {
               adapter: {
                 config: {

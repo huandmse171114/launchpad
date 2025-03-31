@@ -25,27 +25,12 @@ export async function fetchUser() {
 
     if (data) {
       window.currentUser = {
-        id: data.name || 'Vjp pro',
+        id: data.name || 'Vjppro',
         firstName: data.firstname || 'Oach xa lach',
         lastName: data.lastname || 'Pham Thoai',
         fullName: (data.firstname && data.lastname) ? `${data.firstname} ${data.lastname}` : 'Me Bap',
         email: data.email || 'email@example.com',
         name: data.name || 'email@example.com'
-      };
-
-      window["sap-ushell-config"].services = {
-        ...window["sap-ushell-config"].services,
-        Container: {
-          adapter: {
-            config: {
-              id: data.name || 'DefaultUser',
-              firstName: data.firstname || 'Default',
-              lastName: data.lastname || 'User',
-              fullName: (data.firstname && data.lastname) ? `${data.firstname} ${data.lastname}` : 'Default Userccccc',
-              email: data.email || 'default.user@example.com'
-            }
-          }
-        }
       };
     } else {
       console.error("Error: User infos empty");
@@ -54,7 +39,7 @@ export async function fetchUser() {
     console.warn("Error: User infos could not be fetched");
     console.warn(`Error: ${error}`);
     window.currentUser = {
-      id: 'Vjp pro',
+      id: 'Vjppro',
       firstName: 'Oach xa lach',
       lastName: 'Pham Thoai',
       fullName: 'Me Bap',
