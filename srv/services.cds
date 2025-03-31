@@ -28,12 +28,14 @@ type Inbound {
 
 type LaunchpadTilesResponse {
     username :      String;
+    status   :      Int16;
+    message  :      String;
     tiles    : many Tile;
 }
 
 service Users {
 
     entity Users as projection on ns.Users;
-    function getUsersLaunchpadTiles(username: String) returns LaunchpadTilesResponse;
+    function getUsersLaunchpadTiles(username : String) returns LaunchpadTilesResponse;
 
 }

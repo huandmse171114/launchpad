@@ -24,14 +24,13 @@ export async function fetchUser() {
     const data = await res.json();
 
     if (data) {
-      console.log("Running this script");
       window.currentUser = {
         id: data.name || 'Vjp pro',
         firstName: data.firstname || 'Oach xa lach',
         lastName: data.lastname || 'Pham Thoai',
         fullName: (data.firstname && data.lastname) ? `${data.firstname} ${data.lastname}` : 'Me Bap',
-        email: data.email || 'minhhuan0507@example.com',
-        name: data.name || 'minhhuan0507@gmail.com'
+        email: data.email || 'email@example.com',
+        name: data.name || 'email@example.com'
       };
 
       window["sap-ushell-config"].services = {
@@ -54,13 +53,12 @@ export async function fetchUser() {
   } catch (error) {
     console.warn("Error: User infos could not be fetched");
     console.warn(`Error: ${error}`);
-    console.log("Running this script");
     window.currentUser = {
       id: 'Vjp pro',
       firstName: 'Oach xa lach',
       lastName: 'Pham Thoai',
       fullName: 'Me Bap',
-      email: 'minhhuan0507@example.com',
+      email: 'email@example.com',
       name: 'minhhuan0507@gmail.com'
     };
   }

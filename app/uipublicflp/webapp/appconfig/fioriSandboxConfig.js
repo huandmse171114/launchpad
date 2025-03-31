@@ -5,6 +5,8 @@ import { fetchUser } from './fioriSandboxUser.js'
   const customHost = document.cookie.match('(^|;)\\s*' + 'x-custom-host' + '\\s*=\\s*([^;]+)')?.pop() || ''
   await fetchUser()
 
+  console.log(currentUser)
+
   await fetch(`/odata/v4/users/getUsersLaunchpadTiles(username='${window.currentUser.name}')`)
     .then(response => {
       if (!response.ok) {
@@ -13,7 +15,7 @@ import { fetchUser } from './fioriSandboxUser.js'
       return response.json();
     })
     .then((data) => {
-      if (data.tiles) {
+      if (data.status === 200) {
         console.log(data.tiles)
         const inbounds = data.tiles.reduce((acc, item) => {
           acc[item.id] = item.inbound;
@@ -75,10 +77,11 @@ import { fetchUser } from './fioriSandboxUser.js'
             }
           }
         };
+      } else {
+        console.log(data)
       }
     })
     .catch(error => {
       console.error("Error fetching unbound function:", error);
     });
-
 }());
