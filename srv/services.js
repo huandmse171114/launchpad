@@ -18,7 +18,6 @@ module.exports = async (srv) => {
 
         //Get current user 
         const { username } = req.data;
-        console.log("aaa", username)
 
         //If request does not contain username parameter
         if (!username) {
@@ -92,7 +91,7 @@ module.exports = async (srv) => {
             //or has the roleCollections in the list userGroups base on roleCollections.name and userGroupsName, 
             //then get that mock app, otherwise remove from the list
             mockApps = mockApps.filter(app =>
-                app.roleCollections.some(rc => userGroupsName.includes(rc.name) || !rc.roleCollections)
+                app.roleCollections.some(rc => userGroupsName.includes(rc.name)) || app.roleCollections.length === 0
             );
         } else {
             return {

@@ -7,9 +7,6 @@ import { fetchUser } from './fioriSandboxUser.js'
 
   const currentUser = window.currentUser
 
-  console.log("aaaaa")
-  console.log(currentUser)
-
   await fetch(`/odata/v4/users/getUsersLaunchpadTiles(username='${currentUser.name}')`)
     .then(response => {
       if (!response.ok) {
