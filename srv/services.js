@@ -1,20 +1,26 @@
 const cds = require("@sap/cds")
+const cfenv = require("cfenv")
+
 module.exports = async (srv) => {
 
     srv.on("getUsersLaunchpadTiles", async (req) => {
         //Define all of the launchpad applications here
         let mockApps = [
             {
-                appId: "prdedicated-4a1685dctrial-dev!t406116",
-                title: "Purchase Requisition",
-                url: "https://4a1685dctrial-dev-prdedicated.cfapps.us10-001.hana.ondemand.com/",
+                appId: "zdomus-4a1685dctrial-dev!t406116",
+                title: "ZDOMUS User 1 Launchpage",
+                url: "https://user1-1lasyvy4-4a1685dctrial-dev-zdomus.cfapps.us10-001.hana.ondemand.com/",
                 icon: "sap-icon://documents",
+                type: "multitenancy",
                 roleCollections: []
             }
         ];
 
         //Connect to UXSUAA API
         const xsuaa = await cds.connect.to("xsuaa");
+        const appEnv = cfenv.getAppEnv()
+        console.log("App Environment")
+        console.log(appEnv)
 
         //Get current user 
         const { username } = req.data;
@@ -28,7 +34,7 @@ module.exports = async (srv) => {
                 tiles: undefined
             }
         }
-
+ 
         //Get user data on XSUAA
         const { resources } = await xsuaa.get(`/Users?filter=username eq "${username}"`);
 
@@ -37,6 +43,7 @@ module.exports = async (srv) => {
             const userGroups = resources[0].groups;
             // Get list of role collections name
             const userGroupsName = userGroups.map((group) => group.value);
+            const apps = await xsuaa.get(`/sap/rest/authorization/v2/apps`);
 
             for (const [index, mockApp] of mockApps.entries()) {
                 let rolesByAppId;

@@ -27,7 +27,7 @@
                     return Controller.extend("PreviewController", {
                         onInit: function () {
 
-                            const data = {"Services":[{"ServiceName":"Users","DetailsURL":"./odata/v4/users/","Metadata":"./odata/v4/users/$metadata","Entities":[{"Name":"Users","URL":"./odata/v4/users/Users","FioriURL":"$fiori-preview/Users/Users#preview-app"}],"EntitiesCount":1}]}
+                            const data = {"Services":[{"ServiceName":"Users","DetailsURL":"./odata/v4/users/","Metadata":"./odata/v4/users/$metadata","Entities":[],"EntitiesCount":0}]}
                             this.getView().setModel(new JSONModel(data));
                         }
                     });

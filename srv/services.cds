@@ -1,4 +1,4 @@
-using {ns} from '../db/schema';
+
 
 type Tile {
     id            : String;
@@ -34,8 +34,5 @@ type LaunchpadTilesResponse {
 }
 
 service Users {
-
-    entity Users as projection on ns.Users;
     function getUsersLaunchpadTiles(username : String) returns LaunchpadTilesResponse;
-
 }

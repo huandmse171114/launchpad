@@ -15,6 +15,8 @@ modules:
     type: nodejs
     path: gen/srv
     parameters:
+      disk-quota: 256M
+      memory: 256M
       buildpack: nodejs_buildpack
       readiness-health-check-type: http
       readiness-health-check-http-endpoint: /health
@@ -27,7 +29,7 @@ modules:
     requires:
       - name: launchpad-destination
       - name: launchpad-auth
-      - name: launchpad_dedicated-db
+
 
   - name: launchpad-app-deployer
     type: com.sap.application.content
@@ -81,14 +83,6 @@ modules:
       supported-platforms:
         []
 
-  - name: launchpad_dedicated-db-deployer
-    type: hdb
-    path: gen/db
-    parameters:
-      buildpack: nodejs_buildpack
-    requires:
-      - name: launchpad_dedicated-db
-
 resources:
   - name: launchpad-auth
     type: org.cloudfoundry.managed-service
@@ -117,8 +111,3 @@ resources:
     parameters:
       service: html5-apps-repo
       service-plan: app-runtime
-  - name: launchpad_dedicated-db
-    type: com.sap.xs.hdi-container
-    parameters:
-      service: hana
-      service-plan: hdi-shared
